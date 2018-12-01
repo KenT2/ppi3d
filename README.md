@@ -1,2 +1,1 @@
-# ppi3d
-Experimant to integrate pi3d into Pi Resents
+See ppi3d.py for details
