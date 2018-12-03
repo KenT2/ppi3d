@@ -2,48 +2,51 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 """
-ppi3d aims to test whether vaarious aspects of pi3d can benefit Pi Presents. The main features of interest are:
-a. Transitions between slides - fade, wipe and other geometric effects, Pi3d's blenders,  ken burns effect ( pan and zoom still image)
+ppi3d aims to test whether various features of pi3d can benefit Pi Presents. The main features of interest are:
+a. Transitions between slides - fade, wipe and other geometric effects, Pi3d's blenders,  'ken burns effect' ( pan and zoom still image)
 b. Text over videos
 c. Fancy text effects like in stringmulti
-d. Allow access to all pi3d passive 3d images and effects, Pi Presents woudl provide an environment for users to write python for this. 
+d. Allow access to all pi3d passive 3d images and effects, Pi Presents would provide an environment for users to write python for this. 
 e. Keep Tkinter as the current Pi Presents is implemented using this
 
-Pi Presents plays shows, there are many types of shows. A show displays tracks, the different types of show
+PI PRESENTS
+Pi Presents plays shows, there are many types of shows. A show displays tracks; the different types of show
  mainly setting the control method for switching between tracks.
- There can be one or more shows running concurrently, usually occupying different parts of the screen.
- 
+There can be one or more shows running concurrently, usually occupying different parts of the screen.
+
+PPI3D
 ppi3d runs two identical shows in different parts of the screen. The show is a 'mediashow' which automatically
  cycles around a number of tracks
  
-One of the aims of ppi3d was to show I could layer the presentation of each track, back to front.
+One of the aims of ppi3d is to show I could layer the presentation of each track, back to front.
 a. a show background which stays the same for each track (implemented by Tkinter at desktop layer)
 b. a video (implemented by omxplayer layer above desktop)
-c. an alternative show background implemented by Pi3d so it appears in front of videos (pi3d layer above omxplayer)
-d. A track image which will have transition effects between tracks (pi3d layer above omxplayer)
-e. Text implemented as in stringmulti, maybe fixedstring as well (pi3d layer above omxplayer)
+c. an alternative show background implemented by Pi3d so it appears in front of videos (in the pi3d layer above omxplayer)
+d. A track image which will have transition effects between tracks (in the pi3d layer above omxplayer)
+e. Text implemented as in stringmulti, maybe fixedstring as well (in the pi3d layer above omxplayer)
 
 The other aims were to:
-a. investigate transitions so there is fade, wipe and your blend_
+a. investigate transitions so there is fade, wipe and pi3d's blend_.
 b. To show Tkinter integration, mainly widget.after, keyboard and mouse
 
 RUNNING
-ppi3d should be self contained, all the images, videos, etc. should be there
-use develop branch of pi3d or else the videos will appear in the wrong order. demo.py reflects this
+ppi3d should be self contained, all the images, videos, etc. should be in the github repo
+use the develop branch of pi3d or else the videos will appear in the wrong layer. demo.py reflects this use
 sudo pip install pi3d
 sudo pip3 install pi3d
 sudo apt-get install python-imaging-tk
+sudo apt-get install python3-pil.imagetk
 
 I have modified blend_include_fs.inc to set edge_alpha to 0.0
 
-Run using python ppi3d.py python3 ppi3d.py. Use escape to exit. However when using python ppi3d.py after 
-reboot escape leaves images on the screen. This can be corrected permanently by running the python3 versions
+Run using python ppi3d.py or python3 ppi3d.py. Use escape to exit. However when using python ppi3d.py after 
+reboot escape leaves images on the screen. This can be corrected permanently by running the python3 versions!
 
-The shaders used can be changed around line 91 ????
+The list of shaders used can be changed around line 91. The length of shaders determines which images and text are displayed
 You can run with one or two shows by altering line self.enable_show2 = True (line 490 ish)
-Don't alter self.Tkinter=True, its for one day experimenting with your oother keyboard/mouse solutions
+Don't alter self.Tkinter=True, its for future experimentation with pi3d's other keyboard/mouse solutions
 
-omxplayer sometimes does not quit properly and will leave unused tasks running, clesr omxplayyer .bin out of there are funny effects
+omxplayer sometimes does not quit properly and will leave unused tasks running, clear omxplayyer.bin out if there are funny effects
 The initial track is not initiated properly, ignore this.
 """
 
@@ -92,6 +95,7 @@ class Show(object):
         self.videos=['1sec.mp4','5sec.mp4','1sec.mp4','5s ec.mp4','1sec.mp4','5sec.mp4']
         self.images=['mountain.jpg','river.jpg','space.jpg','mountain.jpg','river.jpg','space.jpg']
         self.texts=['text0','text1','text2','text3','text4','text5']
+        
         #self.shaders=['fade','wipe-right','fade',"wipe-left","fade"]
         self.shaders=['wipe-right','wipe-right',"blend_holes",'fade']
         #self.shaders = ["blend_star","blend_holes","blend_false","blend_burn","blend_bump","blend_false"]
